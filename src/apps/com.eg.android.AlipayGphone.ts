@@ -240,6 +240,13 @@ export default defineGkdApp({
           exampleUrls: 'https://e.gkd.li/cc064c84-75a9-4447-b01b-9d5597515093',
           snapshotUrls: 'https://i.gkd.li/i/18409779',
         },
+        {
+          key: 3,
+          activityIds:
+            'com.alipay.mobile.nebulax.xriver.activity.XRiverActivity',
+          matches: 'Image[text="关闭弹屏"]',
+          snapshotUrls: 'https://i.gkd.li/i/22531246',
+        },
       ],
     },
     {
@@ -473,6 +480,43 @@ export default defineGkdApp({
             '[id="com.alipay.mobile.beevideo:id/fl_bee_player_view_container"][visibleToUser=true]',
           exampleUrls: 'https://e.gkd.li/3698e238-f39b-47ce-b0df-e2e47c15b400',
           snapshotUrls: 'https://i.gkd.li/i/21467483',
+        },
+      ],
+    },
+    {
+      key: 27,
+      name: '功能类-余额宝转出自动勾选[7日内不再提示]',
+      actionMaximum: 1,
+      resetMatch: 'activity',
+      rules: [
+        {
+          activityIds:
+            'com.alipay.mobile.nebulax.xriver.activity.XRiverActivity',
+          matches: [
+            '[text^="该笔为你快速转出"]',
+            '@CheckBox + [text="7日内不再提示"]',
+          ],
+          snapshotUrls: [
+            'https://i.gkd.li/i/22798330', // 勾选前
+            'https://i.gkd.li/i/22798432', // 勾选后
+          ],
+        },
+      ],
+    },
+    {
+      key: 28,
+      name: '功能类-自动领取会员积分',
+      desc: '点击[全部领取]',
+      rules: [
+        {
+          activityIds:
+            'com.alipay.mobile.nebulax.xriver.activity.XRiverActivity',
+          matches:
+            '@[text="全部领取"] < [childCount=1] <n View <<2 * - * >2 [text="我的积分"]',
+          snapshotUrls: [
+            'https://i.gkd.li/i/22951439',
+            'https://i.gkd.li/i/22960401',
+          ],
         },
       ],
     },

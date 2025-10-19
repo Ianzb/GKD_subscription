@@ -308,6 +308,20 @@ export default defineGkdApp({
             'https://i.gkd.li/i/21327634',
           ],
         },
+        {
+          key: 2,
+          activityIds: [
+            '.ona.activity.VideoDetailActivity',
+            '.kmm.VideoDetailKmmActivityBk',
+          ],
+          matches:
+            'RelativeLayout > ComposeView > View > View[clickable=true][childCount=0][visibleToUser=true][index=parent.childCount.minus(1)]',
+          exampleUrls: 'https://e.gkd.li/23606b5d-a8e9-4848-9b5a-059e7ecb08af',
+          snapshotUrls: [
+            'https://i.gkd.li/i/22870972',
+            'https://i.gkd.li/i/22894605',
+          ],
+        },
       ],
     },
     {

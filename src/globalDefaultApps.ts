@@ -177,6 +177,7 @@ export const blackListAppIDs: string[] = [
   'me.neko.fckvip', // Fuck for VIP
   'gr.nikolasspyr.integritycheck', // Play Integrity API Checker
   'com.luckyzyx.luckytool', // 全局规则误触 https://i.gkd.li/i/21339859
+  'ai.x.grok', // Grok 全局规则误触 https://i.gkd.li/i/22884434
 
   'com.canghai.haoka',
   'com.xy.td',
@@ -377,6 +378,8 @@ export const openAdWhiteListAppIDs = new Set([
   'com.heytap.themestore', // oppo主题商店
   'com.bbk.theme', // vivo主题商店
   'com.vivo.game', // vivo游戏中心 https://i.gkd.li/i/20097148
+  'com.meizu.media.video', // 魅族视频
+  'com.hihonor.vmall', // 荣耀商城
 ]);
 
 // 更新提示白名单

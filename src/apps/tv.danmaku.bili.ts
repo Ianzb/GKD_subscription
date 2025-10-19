@@ -264,7 +264,7 @@ export default defineGkdApp({
       rules: [
         {
           key: 1,
-          action: 'clickCenter',
+          //action: 'clickCenter', 此种点击方式在部分应用版本会造成误触，需点击 clickable=true 节点
           activityIds: [
             'tv.danmaku.bili.MainActivityV2',
             'com.bilibili.vip.web.VipWebActivity',
@@ -279,6 +279,7 @@ export default defineGkdApp({
             'https://i.gkd.li/i/15289942',
             'https://i.gkd.li/i/15328394',
             'https://i.gkd.li/i/18236032',
+            'https://i.gkd.li/i/22310507',
           ],
         },
         {
@@ -335,11 +336,12 @@ export default defineGkdApp({
         },
         {
           preKeys: [1],
-          matches: '@[clickable=true] > [text="不感兴趣"]',
+          matches: '@[clickable=true] > [text$="不感兴趣"]',
           exampleUrls: 'https://e.gkd.li/5e6e4b69-ba97-473d-9f62-631c296da589',
           snapshotUrls: [
             'https://i.gkd.li/i/17269055',
             'https://i.gkd.li/i/17964356',
+            'https://i.gkd.li/i/22657666', // 直播
           ],
         },
       ],
@@ -414,6 +416,41 @@ export default defineGkdApp({
           exampleUrls: 'https://e.gkd.li/4bfd6131-d4be-46be-affb-73338b01f49c',
           snapshotUrls: 'https://i.gkd.li/i/18164075',
         },
+      ],
+    },
+    {
+      key: 17,
+      name: '功能类-自动点击评论区的[展开更多评论]',
+      rules: [
+        {
+          fastQuery: true,
+          activityIds: [
+            'com.bilibili.video.story.StoryVideoActivity',
+            'com.bilibili.ship.theseus.detail.UnitedBizDetailsActivity',
+          ],
+          matches: '@LinearLayout[clickable=true] > [text="展开更多评论"]',
+          exampleUrls: 'https://e.gkd.li/e7b7167e-7623-4079-9f16-fd253f303074',
+          snapshotUrls: [
+            'https://i.gkd.li/i/22572375',
+            'https://i.gkd.li/i/22573433',
+          ],
+        },
+      ],
+    },
+    {
+      key: 18,
+      name: '功能类-自动领取会员经验',
+      rules: [
+        {
+          fastQuery: true,
+          activityIds: 'com.bilibili.vip.web.VipWebActivity',
+          matches:
+            '[text^="专属等级加速包"] +n @TextView[childCount=0][text="领取"] <<n [vid="webview"]',
+        },
+      ],
+      snapshotUrls: [
+        'https://i.gkd.li/i/22886723', // 领取前
+        'https://i.gkd.li/i/22886739', // 领取后
       ],
     },
   ],
