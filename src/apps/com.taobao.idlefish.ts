@@ -53,11 +53,8 @@ export default defineGkdApp({
     },
     {
       key: 4,
-      name: '全屏广告-红包弹窗',
+      name: '全屏广告',
       desc: '点击关闭',
-      matchTime: 10000,
-      actionMaximum: 1,
-      resetMatch: 'app',
       rules: [
         {
           key: 0,
@@ -66,6 +63,25 @@ export default defineGkdApp({
           matches:
             'WebView[text="Rax App"] > [id="root"] >6 View[index=2][clickable=true]',
           snapshotUrls: 'https://i.gkd.li/i/14551046',
+        },
+        {
+          key: 1,
+          fastQuery: true,
+          activityIds:
+            'com.taobao.idlefish.search_implement.SearchResultActivity',
+          matches:
+            '@TextView[width<250 && height<250] - [childCount=0][text="收下红包"] <<n [vid="fish_layer_container_id"]',
+          snapshotUrls: 'https://i.gkd.li/i/23125419',
+        },
+        {
+          key: 2,
+          name: '夜市氛围广告',
+          fastQuery: true,
+          activityIds:
+            'com.idlefish.flutterbridge.flutterboost.boost.FishFlutterBoostActivity',
+          matches:
+            '@TextView[width<210 && height<210][clickable=true] <<n WebView[childCount!=0][text="夜市氛围弹框"] <<n [vid="fish_layer_container_id"]',
+          snapshotUrls: 'https://i.gkd.li/i/23183586',
         },
       ],
     },
@@ -140,8 +156,11 @@ export default defineGkdApp({
           fastQuery: true,
           activityIds: 'com.alipay.android.msp.ui.views.MspContainerActivity',
           matches:
-            '@CheckBox[checked=true] < * - [text*="免密支付"][visibleToUser=true]',
-          snapshotUrls: 'https://i.gkd.li/i/22656242',
+            '@CheckBox[clickable=true][checked=true] < * - [text$="免密支付"][visibleToUser=true]',
+          snapshotUrls: [
+            'https://i.gkd.li/i/23455398', // 关闭前
+            'https://i.gkd.li/i/23455378', // 关闭后
+          ],
         },
       ],
     },

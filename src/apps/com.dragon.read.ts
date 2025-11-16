@@ -5,6 +5,24 @@ export default defineGkdApp({
   name: '番茄免费小说',
   groups: [
     {
+      key: -1,
+      name: '开屏广告',
+      matchTime: 10000,
+      actionMaximum: 1,
+      resetMatch: 'app',
+      priorityTime: 10000,
+      rules: [
+        {
+          fastQuery: true,
+          actionDelay: 1000, // 过早点击可能导致应用闪退
+          matches:
+            '@[desc="跳过广告"][clickable=true] > [text*="跳过"][text.length<10][visibleToUser=true]',
+          exampleUrls: 'https://e.gkd.li/e36d701f-bcee-48d5-99da-1c5301101d9e',
+          snapshotUrls: 'https://i.gkd.li/i/23282793',
+        },
+      ],
+    },
+    {
       key: 0,
       name: '局部广告-阅读页面广告',
       activityIds: [
@@ -106,7 +124,7 @@ export default defineGkdApp({
     },
     {
       key: 3,
-      name: '全屏广告-弹窗广告',
+      name: '全屏广告',
       rules: [
         {
           key: 0,
@@ -146,6 +164,34 @@ export default defineGkdApp({
           exampleUrls:
             'https://m.gkd.li/57941037/96afbb4f-afd5-4f64-948d-15fc7bb14075',
           snapshotUrls: 'https://i.gkd.li/i/15223416',
+        },
+        {
+          key: 4,
+          fastQuery: true,
+          activityIds: '.reader.ui.ReaderActivity',
+          matches:
+            'AwemeLynxVideoUI +n FlattenUIText[text="关闭"][clickable=true][visibleToUser=true]',
+          exampleUrls: 'https://e.gkd.li/6d33c17b-85de-4977-aa7f-b45e2a917a12',
+          snapshotUrls: 'https://i.gkd.li/i/23549149',
+        },
+        {
+          key: 5,
+          fastQuery: true,
+          activityIds: 'com.dragon.read.reader.ui.ReaderActivity',
+          matches:
+            'TextView[text="广告"] +2 Button[id="com.dragon.read:id/close"]',
+          snapshotUrls: 'https://i.gkd.li/i/13191156',
+        },
+        {
+          key: 6,
+          fastQuery: true,
+          activityIds: 'com.dragon.read.reader.ui.ReaderActivity',
+          matches:
+            '@ImageView[clickable=true][visibleToUser=true] +5 [text="领取限时福利"]',
+          snapshotUrls: [
+            'https://i.gkd.li/i/14430326',
+            'https://i.gkd.li/i/14969861',
+          ],
         },
       ],
     },
@@ -239,37 +285,6 @@ export default defineGkdApp({
       ],
     },
     {
-      key: 12,
-      name: '全屏广告',
-      desc: '点击"关闭"',
-      rules: [
-        {
-          fastQuery: true,
-          activityIds: 'com.dragon.read.reader.ui.ReaderActivity',
-          matches:
-            'TextView[text="广告"] +2 Button[id="com.dragon.read:id/close"]',
-          snapshotUrls: 'https://i.gkd.li/i/13191156',
-        },
-      ],
-    },
-    {
-      key: 14,
-      name: '全屏广告-会员福利弹窗',
-      desc: '点击关闭',
-      rules: [
-        {
-          fastQuery: true,
-          activityIds: 'com.dragon.read.reader.ui.ReaderActivity',
-          matches:
-            '@ImageView[clickable=true][visibleToUser=true] +5 [text="领取限时福利"]',
-          snapshotUrls: [
-            'https://i.gkd.li/i/14430326',
-            'https://i.gkd.li/i/14969861',
-          ],
-        },
-      ],
-    },
-    {
       key: 15,
       name: '功能类-关闭广告声音',
       actionMaximum: 1,
@@ -287,15 +302,18 @@ export default defineGkdApp({
     },
     {
       key: 16,
-      name: '功能类-观看广告后点击获得听书时长旁边的关闭按钮',
+      name: '功能类-观看广告后点击[获得听书时长/领取成功]旁边的关闭按钮',
       rules: [
         {
           fastQuery: true,
           activityIds: 'com.ss.android.excitingvideo.ExcitingVideoActivity',
           matches:
-            '@LynxFlattenUI[clickable=true] -2 [text="获得听书时长"] -n FlattenUIText[text="广告"]',
+            '@LynxFlattenUI[clickable=true] -2 [text="获得听书时长" || text="领取成功"] -n FlattenUIText[text="广告"]',
           exampleUrls: 'https://e.gkd.li/8f6a6b4b-b189-48b8-a068-d66514b244e3',
-          snapshotUrls: 'https://i.gkd.li/i/20989165',
+          snapshotUrls: [
+            'https://i.gkd.li/i/20989165',
+            'https://i.gkd.li/i/23325310',
+          ],
         },
       ],
     },

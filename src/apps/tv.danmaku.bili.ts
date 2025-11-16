@@ -10,11 +10,12 @@ export default defineGkdApp({
       matchRoot: true,
       fastQuery: true,
       //matchTime: 10000, 从桌面小组件进入哔哩哔哩观看视频后，退出返回到哔哩哔哩首页时会跳出开屏广告
-      actionMaximum: 1,
+      actionMaximum: 2, // 可能连续出现两次 https://github.com/AIsouler/GKD_subscription/issues/1280
       resetMatch: 'app',
       priorityTime: 10000,
       rules: [
         {
+          actionCd: 500,
           matches: '[vid="count_down" || vid="skip"][visibleToUser=true]', // [text*="跳过"] 可能会误触搜索框
           snapshotUrls: [
             'https://i.gkd.li/i/16187624',
@@ -128,26 +129,29 @@ export default defineGkdApp({
     },
     {
       key: 8,
-      name: '局部广告-直播间卡片广告',
+      name: '局部广告-直播间悬浮窗广告',
       desc: '点击关闭',
       fastQuery: true,
-      matchTime: 10000,
-      actionMaximum: 1,
       activityIds: 'com.bilibili.bililive.room.ui.roomv3.LiveRoomActivityV3',
       rules: [
         {
           key: 0,
-          name: '直播间底部售卖卡片',
-          matches: '[id="tv.danmaku.bili:id/shopping_close"]',
-          snapshotUrls: 'https://i.gkd.li/i/13200549',
+          matches:
+            '[id="tv.danmaku.bili:id/shopping_close" || vid="live_game_card_close" || vid="match_close"][visibleToUser=true]',
+          snapshotUrls: [
+            'https://i.gkd.li/i/13200549',
+            'https://i.gkd.li/i/22990081',
+            'https://i.gkd.li/i/23098023',
+          ],
         },
         {
           key: 1,
-          name: '[关注/投喂]弹窗',
-          matches: '@[vid="close"] - [vid="up_avatar" || vid="gift_icon"]',
+          matches:
+            '@[vid="close" || vid="iv_close"] - [vid="up_avatar" || vid="gift_icon" || vid="follow_container"][visibleToUser=true]',
           snapshotUrls: [
             'https://i.gkd.li/i/14782965',
             'https://i.gkd.li/i/18046573',
+            'https://i.gkd.li/i/22990105',
           ],
         },
       ],
@@ -184,7 +188,7 @@ export default defineGkdApp({
         {
           key: 0,
           matches:
-            '@[vid="more"] <<n [vid="tool_container" || vid="ad_tint_frame"][visibleToUser=true]',
+            '@[vid="more" || id="tv.danmaku.bili.adbiz:id/more"] <<n [vid="tool_container" || vid="ad_tint_frame" || id="tv.danmaku.bili.adbiz:id/ad_tint_frame" || id="tv.danmaku.bili.adbiz:id/root_container"][visibleToUser=true]',
           snapshotUrls: [
             'https://i.gkd.li/i/14083540',
             'https://i.gkd.li/i/14588315',
@@ -192,6 +196,8 @@ export default defineGkdApp({
             'https://i.gkd.li/i/18274379',
             'https://i.gkd.li/i/18306851',
             'https://i.gkd.li/i/19537979',
+            'https://i.gkd.li/i/23012670',
+            'https://i.gkd.li/i/23123800',
           ],
         },
         {
@@ -296,6 +302,14 @@ export default defineGkdApp({
             'https://i.gkd.li/i/15523975',
             'https://i.gkd.li/i/15814146',
           ],
+        },
+        {
+          key: 5,
+          fastQuery: true,
+          activityIds: 'com.bilibili.vip.web.VipWebActivity',
+          matches:
+            '@TextView[width<130 && height<130] - TextView[childCount=0][id="dialog-canvas"] <<n [vid="webview"]',
+          snapshotUrls: 'https://i.gkd.li/i/23385023',
         },
       ],
     },
@@ -411,10 +425,16 @@ export default defineGkdApp({
       rules: [
         {
           fastQuery: true,
-          activityIds: 'com.bilibili.video.story.StoryVideoActivity',
+          activityIds: [
+            'com.bilibili.video.story.StoryVideoActivity',
+            'com.bilibili.video.story.StoryTransparentActivity',
+          ],
           matches: '[vid="story_ctrl_router"][visibleToUser=true]',
           exampleUrls: 'https://e.gkd.li/4bfd6131-d4be-46be-affb-73338b01f49c',
-          snapshotUrls: 'https://i.gkd.li/i/18164075',
+          snapshotUrls: [
+            'https://i.gkd.li/i/18164075',
+            'https://i.gkd.li/i/23325994',
+          ],
         },
       ],
     },
@@ -426,12 +446,14 @@ export default defineGkdApp({
           fastQuery: true,
           activityIds: [
             'com.bilibili.video.story.StoryVideoActivity',
+            'com.bilibili.video.story.StoryTransparentActivity',
             'com.bilibili.ship.theseus.detail.UnitedBizDetailsActivity',
           ],
           matches: '@LinearLayout[clickable=true] > [text="展开更多评论"]',
           exampleUrls: 'https://e.gkd.li/e7b7167e-7623-4079-9f16-fd253f303074',
           snapshotUrls: [
             'https://i.gkd.li/i/22572375',
+            'https://i.gkd.li/i/23325508',
             'https://i.gkd.li/i/22573433',
           ],
         },
@@ -445,12 +467,52 @@ export default defineGkdApp({
           fastQuery: true,
           activityIds: 'com.bilibili.vip.web.VipWebActivity',
           matches:
-            '[text^="专属等级加速包"] +n @TextView[childCount=0][text="领取"] <<n [vid="webview"]',
+            'TextView[childCount=0][text!=null][index=parent.childCount.minus(1)] -2 View >3 [text^="专属等级加速包"] +2 @TextView[childCount=0][text="领取"] <<n [vid="webview"]',
+          snapshotUrls: [
+            'https://i.gkd.li/i/22886723', // 领取前
+            'https://i.gkd.li/i/22886739', // 领取后
+          ],
+          excludeSnapshotUrls: 'https://i.gkd.li/i/23385023',
         },
       ],
-      snapshotUrls: [
-        'https://i.gkd.li/i/22886723', // 领取前
-        'https://i.gkd.li/i/22886739', // 领取后
+    },
+    {
+      key: 19,
+      name: '功能类-自动点击查看原图',
+      rules: [
+        {
+          fastQuery: true,
+          activityIds: [
+            'com.bilibili.video.story.StoryVideoActivity', // 视频：竖屏模式1
+            'com.bilibili.video.story.StoryTransparentActivity', // 视频：竖屏模式2
+            'com.bilibili.ship.theseus.detail.UnitedBizDetailsActivity', // 视频：详情页模式
+            'com.bilibili.bplus.followinglist.page.browser.ui.LightBrowserActivityV2', // 动态：图片
+            'com.bilibili.lib.ui.ComposeActivity', // 动态：评论图片
+            'com.bilibili.column.ui.detail.image.ColumnImageViewerActivity', // 专栏图片
+          ],
+          matches: '[text^="查看原图"][visibleToUser=true]',
+          exampleUrls: 'https://e.gkd.li/c0ffc9cb-fac0-4b5c-9645-3674942b5c7d',
+          snapshotUrls: [
+            'https://i.gkd.li/i/23325552', // 视频：竖屏模式1
+            'https://i.gkd.li/i/23304237', // 视频：竖屏模式2
+            'https://i.gkd.li/i/23304245', // 视频：详情页模式
+            'https://i.gkd.li/i/23305280', // 动态：帖内图片
+            'https://i.gkd.li/i/23305281', // 动态：评论图片
+            'https://i.gkd.li/i/23305275', // 专栏图片
+          ],
+        },
+      ],
+    },
+    {
+      key: 20,
+      name: '评价提示',
+      rules: [
+        {
+          fastQuery: true,
+          activityIds: 'com.bilibili.search2.main.BiliMainSearchActivity',
+          matches: '[vid="rating_dialog_close"][clickable=true]',
+          snapshotUrls: 'https://i.gkd.li/i/23440560',
+        },
       ],
     },
   ],

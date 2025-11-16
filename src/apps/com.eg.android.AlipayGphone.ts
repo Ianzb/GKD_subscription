@@ -43,15 +43,21 @@ export default defineGkdApp({
       key: 1,
       name: '权限提示-定位权限',
       fastQuery: true,
-      actionMaximum: 1,
-      resetMatch: 'app',
       rules: [
         {
           key: 0,
-          activityIds: '.AlipayLogin',
+          activityIds: [
+            '.AlipayLogin',
+            'com.alipay.mobile.nebulax.xriver.activity.XRiverActivity$App',
+            'com.alipay.mobile.beehive.cityselect.ui.CeilingHomeCitySelectActivity',
+          ],
           matches: '@[desc="取消"] + [text*="位置权限"][visibleToUser=true]',
           exampleUrls: 'https://e.gkd.li/caa96cc4-9943-40d8-8cb6-8c89aa60b20f',
-          snapshotUrls: 'https://i.gkd.li/i/18549931',
+          snapshotUrls: [
+            'https://i.gkd.li/i/18549931',
+            'https://i.gkd.li/i/23415365',
+            'https://i.gkd.li/i/23415366',
+          ],
         },
         {
           key: 1,
@@ -128,12 +134,16 @@ export default defineGkdApp({
           activityIds: [
             'com.alipay.mobile.about.ui.AboutAlipayActivity',
             '.AlipayLogin',
+            'com.alipay.mobile.nebulax.integration.mpaas.activity.NebulaTransActivity$Main',
           ],
-          matches:
-            '[text="版本更新"||text^="Version"] - [id="com.alipay.mobile.antui:id/btn_close"]',
+          matches: [
+            '[text="版本更新" || text^="Version"]',
+            '[id="com.alipay.mobile.antui:id/btn_close" || id="com.alipay.mobile.accountauthbiz:id/close_dialog_button"]',
+          ],
           snapshotUrls: [
             'https://i.gkd.li/i/13490805',
             'https://i.gkd.li/i/13580594',
+            'https://i.gkd.li/i/23236828',
           ],
         },
         {
@@ -147,8 +157,8 @@ export default defineGkdApp({
     },
     {
       key: 4,
-      name: '功能类-设置支付宝小组件',
-      desc: '点击关闭',
+      name: '全屏广告-小组件弹窗',
+      desc: '点击[近期不再提醒我]',
       rules: [
         {
           key: 0,
@@ -162,12 +172,18 @@ export default defineGkdApp({
         },
         {
           key: 1,
-          activityIds:
+          activityIds: [
             'com.alipay.mobile.nebulax.integration.mpaas.activity.NebulaActivity$Main',
-          matches:
-            '[text="添加会员小组件"] < View +3 View[childCount=2] > [text="近期不再提醒我"]',
+            'com.alipay.mobile.nebulax.xriver.activity.XRiverActivity',
+          ],
+          matches: '[text="去添加"] + [text="近期不再提醒我"]',
           exampleUrls: 'https://e.gkd.li/de3df4c8-6ab4-45a0-aec5-0fbdfa75e823',
-          snapshotUrls: 'https://i.gkd.li/i/16427922',
+          snapshotUrls: [
+            // 弹窗中的文字和图片每隔几秒切换
+            'https://i.gkd.li/i/16427922',
+            'https://i.gkd.li/i/22984695',
+            'https://i.gkd.li/i/22984696',
+          ],
         },
       ],
     },
@@ -393,6 +409,14 @@ export default defineGkdApp({
             'https://m.gkd.li/57941037/2d714755-efe9-4c63-8187-7f9b7a5a199c',
           snapshotUrls: 'https://i.gkd.li/i/15144844',
         },
+        {
+          key: 2,
+          name: '余额宝广告',
+          activityIds:
+            'com.alipay.mobile.nebulax.xriver.activity.XRiverActivity',
+          matches: '@TextView[width<50 && height<50] -n [text="去看看"]',
+          snapshotUrls: 'https://i.gkd.li/i/23054580',
+        },
       ],
     },
     {
@@ -512,11 +536,67 @@ export default defineGkdApp({
           activityIds:
             'com.alipay.mobile.nebulax.xriver.activity.XRiverActivity',
           matches:
-            '@[text="全部领取"] < [childCount=1] <n View <<2 * - * >2 [text="我的积分"]',
+            '@[text^="全部领取"] < [childCount=1] <n View <<2 * - * >2 [text="我的积分"]',
           snapshotUrls: [
             'https://i.gkd.li/i/22951439',
             'https://i.gkd.li/i/22960401',
+            'https://i.gkd.li/i/23455621',
           ],
+        },
+      ],
+    },
+    {
+      key: 29,
+      name: '功能类-无法访问时点击[返回]',
+      rules: [
+        {
+          fastQuery: true,
+          activityIds: [
+            'com.alipay.mobile.nebulax.xriver.activity.XRiverActivity',
+            'com.alipay.mobile.nebulax.xriver.activity.XRiverTransActivity$Main',
+          ],
+          matches: [
+            '[text="访问被拒绝" || text="人气太旺啦，请稍后再试"][visibleToUser=true]',
+            '[id="com.alipay.mobile.antui:id/back_button"][visibleToUser=true]',
+          ],
+          exampleUrls: 'https://e.gkd.li/c1ddb8bf-084b-4109-b777-96c02858d266',
+          snapshotUrls: [
+            'https://i.gkd.li/i/23046994',
+            'https://i.gkd.li/i/23096790',
+            'https://i.gkd.li/i/23549719',
+          ],
+        },
+      ],
+    },
+    {
+      key: 30,
+      name: '其他-滑动验证时返回',
+      rules: [
+        {
+          fastQuery: true,
+          action: 'back',
+          activityIds:
+            'com.alipay.mobile.nebulax.integration.mpaas.activity.NebulaTransActivity$Main',
+          matches:
+            '[childCount=0][text="为保障您的正常访问请进行验证"] <<n [id="com.alipay.multiplatform.phone.xriver_integration:id/h5_trans_progress_rl"]',
+          exampleUrls: 'https://e.gkd.li/f2571f51-3a8c-4e47-a7c5-3363375c1b78',
+          snapshotUrls: 'https://i.gkd.li/i/23158302',
+        },
+      ],
+    },
+    {
+      key: 31,
+      name: '其他-开通刷脸支付弹窗',
+      desc: '点击关闭',
+      rules: [
+        {
+          fastQuery: true,
+          activityIds: 'com.alipay.android.msp.ui.views.MspContainerActivity',
+          matches: [
+            '[text="开通刷脸支付"]',
+            '@[clickable=true] > [text="关闭"]',
+          ],
+          snapshotUrls: 'https://i.gkd.li/i/23455533',
         },
       ],
     },

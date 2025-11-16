@@ -14,7 +14,10 @@ export default defineGkdApp({
       rules: [
         {
           fastQuery: true,
-          excludeActivityIds: '.app.SearchActivity',
+          excludeActivityIds: [
+            '.app.SearchActivity',
+            '.comment.ui.activity.CommentListActivity',
+          ],
           matches:
             '([vid="btn_skip"][visibleToUser=true]) || ([text*="跳过"][text.length<10][visibleToUser=true])',
           exampleUrls: 'https://e.gkd.li/e129aaa6-bf4f-4455-9242-a6779667d814',
@@ -22,7 +25,10 @@ export default defineGkdApp({
             'https://i.gkd.li/i/18221451',
             'https://i.gkd.li/i/22714295',
           ],
-          excludeSnapshotUrls: 'https://i.gkd.li/i/18221225',
+          excludeSnapshotUrls: [
+            'https://i.gkd.li/i/18221225',
+            'https://i.gkd.li/i/23141429',
+          ],
         },
       ],
     },
@@ -114,11 +120,12 @@ export default defineGkdApp({
             '.app.ui.activity.MainActivity',
           ],
           matches:
-            '@[clickable=true] >(1,3) [text$="不感兴趣" || text^="屏蔽作者"]',
+            '@[clickable=true] >(1,3) [text$="不感兴趣" || text^="屏蔽作者" || text="不喜欢该内容"]',
           snapshotUrls: [
             'https://i.gkd.li/i/13849689',
             'https://i.gkd.li/i/17237940',
             'https://i.gkd.li/i/17268849',
+            'https://i.gkd.li/i/23431871',
           ],
         },
       ],

@@ -29,9 +29,9 @@ export default defineGkdApp({
         {
           key: 1,
           fastQuery: true,
-          activityIds: '.activity.HomeActivity',
+          activityIds: ['.activity.HomeActivity', '.mvi.home.HomeActivity'],
           matches:
-            '@ImageView[childCount=0][text=null][desc=null][id=null][visibleToUser=true][width<90 && height<90] < FrameLayout[childCount=1][text=null][desc=null][id=null] <2 FrameLayout[childCount=5] + FrameLayout[childCount=2] > [text^="立即" || text="查看详情" || text="了解更多" || text="去逛逛" || text="去微信看看" || text$="应用" || text="进入小程序" || text="领取优惠" || text="跳转微信"]',
+            '@ImageView[childCount=0][text=null][desc=null][id=null][visibleToUser=true][width<90 && height<90] < FrameLayout[childCount=1][text=null][desc=null][id=null] <2 FrameLayout[childCount=5] + FrameLayout[childCount=2] > [text^="立即" || text$="详情" || text^="了解" || text="去逛逛" || text="去微信看看" || text$="应用" || text="进入小程序" || text="领取优惠" || text="跳转微信"]',
           exampleUrls: 'https://e.gkd.li/a7753ec9-5382-42ee-9a41-b4e2b61b9050',
           snapshotUrls: 'https://i.gkd.li/i/17355585',
         },
@@ -76,20 +76,31 @@ export default defineGkdApp({
         {
           key: 5,
           fastQuery: true,
-          activityIds: '.activity.HomeActivity',
+          activityIds: ['.activity.HomeActivity', '.mvi.home.HomeActivity'],
           matches:
             '@ImageView[childCount=0] < FrameLayout[childCount=1] <2 FrameLayout[childCount=2] <2 FrameLayout[childCount=2] <2 FrameLayout[childCount=2] - FrameLayout > [text^="扭动或点击"]',
           exampleUrls: 'https://e.gkd.li/2debed48-37f2-43ec-8b0f-3a5e06c23ed1',
-          snapshotUrls: 'https://i.gkd.li/i/17378546',
+          snapshotUrls: [
+            'https://i.gkd.li/i/17378546',
+            'https://i.gkd.li/i/23145860',
+          ],
         },
         {
           key: 6,
           fastQuery: true,
-          activityIds: '.activity.HomeActivity',
+          activityIds: [
+            '.activity.HomeActivity',
+            '.mvi.home.HomeActivity',
+            '.mvi.notice.NoticeListActivity',
+          ],
           matches:
-            '@ImageView[childCount=0][text=null][desc=null][id=null][visibleToUser=true][width<90 && height<90] < FrameLayout[childCount=1][text=null][desc=null][id=null][parent.childCount>3] +n FrameLayout >(1,2) [text^="立即" || text="查看详情" || text="了解更多" || text="去微信看看" || text$="应用" || text="进入小程序" || text="领取优惠" || text="跳转微信"]',
+            '@ImageView[childCount=0][text=null][desc=null][id=null][visibleToUser=true][width<90 && height<90] < FrameLayout[childCount=1][text=null][desc=null][id=null][parent.childCount>3] +n FrameLayout >(1,2) [text^="立即" || text$="详情" || text^="了解" || text="去微信看看" || text$="应用" || text="进入小程序" || text="领取优惠" || text="跳转微信"]',
           exampleUrls: 'https://e.gkd.li/f640d0c2-197d-45ef-98ff-58a04920bd2d',
-          snapshotUrls: 'https://i.gkd.li/i/17358027',
+          snapshotUrls: [
+            'https://i.gkd.li/i/17358027',
+            'https://i.gkd.li/i/23206013',
+            'https://i.gkd.li/i/23455815',
+          ],
         },
         {
           key: 7,
@@ -107,6 +118,22 @@ export default defineGkdApp({
             '@ImageView[clickable=true][width<100 && height<100] <2 RelativeLayout < RelativeLayout < RelativeLayout < RelativeLayout < [id="android:id/content"]',
           snapshotUrls: 'https://i.gkd.li/i/22946242',
         },
+        {
+          key: 9,
+          fastQuery: true,
+          activityIds: '.mvi.home.HomeActivity',
+          matches:
+            '@Image[text=""][childCount=0][width<70 && height<70] < View[childCount=1] + * >2 [childCount=0][text="淘宝精选广告"] <<n [vid="fl_native"]',
+          snapshotUrls: 'https://i.gkd.li/i/23254520',
+        },
+        {
+          key: 10,
+          fastQuery: true,
+          activityIds: '.mvi.me.VipPayActivity',
+          matches:
+            '@[desc="top_close_button"][clickable=true] < * + * > [text="广告"]',
+          snapshotUrls: 'https://i.gkd.li/i/23255102',
+        },
       ],
     },
     {
@@ -119,20 +146,39 @@ export default defineGkdApp({
           key: 0,
           fastQuery: true,
           matches:
-            'ImageView[childCount=0] < @ViewGroup[clickable=true][childCount=1] <<n * >4 [text="广告"][visibleToUser=true]',
+            'ImageView[childCount=0] < @ViewGroup[clickable=true][childCount=1] <<n * >4 [text="广告"]',
           exampleUrls: 'https://e.gkd.li/ca109fa3-5a7a-400d-911b-36dd8ac42656',
           snapshotUrls: [
             'https://i.gkd.li/i/22387192',
             'https://i.gkd.li/i/22656913',
             'https://i.gkd.li/i/22863607',
+            'https://i.gkd.li/i/23087561',
           ],
         },
         {
           key: 1,
           fastQuery: true,
           matches:
-            '@Image[childCount=0] < [childCount=1] <n * - * >3 [visibleToUser=true][text="广告"] <<n [vid="fl_native"]',
+            '@Image[childCount=0] < [childCount=1] <n * - * >3 [childCount=0][text="广告"] <<n [vid="fl_native"]',
           snapshotUrls: 'https://i.gkd.li/i/22585927',
+        },
+        {
+          key: 2,
+          fastQuery: true,
+          activityIds: '.mvi.home.HomeActivity',
+          matches: '[vid="ksad_ad_dislike"]',
+          snapshotUrls: 'https://i.gkd.li/i/23054142',
+        },
+        {
+          key: 3,
+          fastQuery: true,
+          activityIds: '.mvi.home.HomeActivity',
+          matches:
+            '@ImageView[width<70 && height<70][childCount=0] < FrameLayout[childCount=1] - * > TextView[childCount=0][text.length>0] <<n [vid="fl_native"]',
+          snapshotUrls: [
+            'https://i.gkd.li/i/23289399',
+            'https://i.gkd.li/i/23289402',
+          ],
         },
       ],
     },
@@ -157,8 +203,11 @@ export default defineGkdApp({
           key: 1,
           fastQuery: true,
           matches:
-            '@TextView[text="···"][visibleToUser=true] +n * >2 [childCount=0][text="广告"] <<n [vid="fl_native"]',
-          snapshotUrls: 'https://i.gkd.li/i/22861405',
+            '@TextView[text="···"][visibleToUser=true] <n * >3 [childCount=0][text="广告"] <<n [vid="fl_native"]',
+          snapshotUrls: [
+            'https://i.gkd.li/i/22861405',
+            'https://i.gkd.li/i/23451517',
+          ],
         },
         {
           preKeys: [0, 1],
@@ -180,9 +229,57 @@ export default defineGkdApp({
       resetMatch: 'app',
       rules: [
         {
+          key: 0,
           activityIds: '.mvi.home.HomeActivity',
           matches: '@ImageView[vid="dialog_close"] +n [text*="公告"]',
           snapshotUrls: 'https://i.gkd.li/i/22526467',
+        },
+        {
+          key: 1,
+          fastQuery: true,
+          activityIds: '.mvi.home.HomeActivity',
+          matches: '[vid="iv"] + [vid="iv_cancel"]',
+          snapshotUrls: 'https://i.gkd.li/i/23205159',
+        },
+      ],
+    },
+    {
+      key: 13,
+      name: '权限提示-不开启可选权限',
+      desc: '点击[暂不开启，继续跑步]',
+      rules: [
+        {
+          key: 0,
+          fastQuery: true,
+          activityIds: '.mvi.home.HomeActivity',
+          matches: [
+            '[text="必要权限未开启！" || text^="当前必要权限不完整"]',
+            '[text^="暂不开启"]',
+          ],
+          snapshotUrls: [
+            'https://i.gkd.li/i/23054372',
+            'https://i.gkd.li/i/23054373',
+          ],
+        },
+      ],
+    },
+    {
+      key: 14,
+      name: '权限提示-定位权限',
+      desc: '点击取消',
+      matchTime: 10000,
+      actionMaximum: 1,
+      resetMatch: 'app',
+      rules: [
+        {
+          fastQuery: true,
+          activityIds: '.mvi.home.HomeActivity',
+          matches: [
+            '[text="定位服务未开启"][visibleToUser=true]',
+            '[text="取消"][visibleToUser=true]',
+          ],
+          exampleUrls: 'https://e.gkd.li/3be509e1-0663-4989-b763-6d68d88979fe',
+          snapshotUrls: 'https://i.gkd.li/i/23096707',
         },
       ],
     },

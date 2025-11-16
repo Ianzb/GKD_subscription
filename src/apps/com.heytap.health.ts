@@ -61,5 +61,34 @@ export default defineGkdApp({
         },
       ],
     },
+    {
+      key: 5,
+      name: '其他-忽略[开启微信运动同步]',
+      rules: [
+        {
+          fastQuery: true,
+          activityIds: 'com.heytap.health.main.MainActivity',
+          matches: '[text^="开启微信运动同步"] + [text="忽略"]',
+          exampleUrls: 'https://e.gkd.li/867170d7-5c10-48fc-8bda-9139235ef718',
+          snapshotUrls: 'https://i.gkd.li/i/23087769',
+        },
+      ],
+    },
+    {
+      key: 6,
+      name: '权限提示-应用使用情况',
+      desc: '点击[暂不]',
+      rules: [
+        {
+          fastQuery: true,
+          activityIds: '.sleep.SleepHistoryActivity',
+          matches: [
+            '[text^="授权“OPPO 健康”应用访问应用使用情况"]',
+            '[text="暂不"]',
+          ],
+          snapshotUrls: 'https://i.gkd.li/i/23146074',
+        },
+      ],
+    },
   ],
 });
