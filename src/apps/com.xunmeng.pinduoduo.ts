@@ -13,9 +13,16 @@ export default defineGkdApp({
       rules: [
         {
           key: 1,
-          activityIds: '.ui.activity.HomeActivity',
-          matches: '@Image[clickable=true][text="webp"] +5 [text="立即升级"]',
-          snapshotUrls: 'https://i.gkd.li/i/13195645',
+          activityIds: [
+            '.ui.activity.HomeActivity',
+            '.ui.activity.MainFrameActivity',
+          ],
+          matches: '@Image[clickable=true] +5 [text="立即升级"]',
+          snapshotUrls: [
+            'https://i.gkd.li/i/13195645',
+            'https://i.gkd.li/i/23936506',
+            'https://i.gkd.li/i/24786015',
+          ],
         },
       ],
     },
@@ -31,9 +38,10 @@ export default defineGkdApp({
             '.ui.activity.HomeActivity',
             '.ui.activity.MainFrameActivity',
           ],
-          excludeMatches: '[text="我的订单"][visibleToUser=true]',
+          excludeMatches:
+            '[text="我的订单" || text="聊天"][bottom<500][visibleToUser=true]',
           matches:
-            '[text="开心收下" || text="去抢购" || text="立即抽免单" || text="去刮奖" || text="立即领取" || text="去领大额金币" || text="送你大额现金" || text*="红包助手" || text="刮刮卡发来的消息通知" || text="立即充值"][visibleToUser=true]',
+            '[text="开心收下" || text="去抢购" || text="立即抽免单" || text="去刮奖" || text="立即领取" || text="去领大额金币" || text="送你大额现金" || text*="红包助手" || text="刮刮卡发来的消息通知" || text="立即充值" || text="打款金额"][top>600][visibleToUser=true]',
           snapshotUrls: [
             'https://i.gkd.li/i/13625441',
             'https://i.gkd.li/i/13761182',
@@ -49,7 +57,10 @@ export default defineGkdApp({
             'https://i.gkd.li/i/17625608',
             'https://i.gkd.li/i/18481318',
           ],
-          excludeSnapshotUrls: 'https://i.gkd.li/i/23352586',
+          excludeSnapshotUrls: [
+            'https://i.gkd.li/i/23352586',
+            'https://i.gkd.li/i/23607429',
+          ],
         },
         {
           key: 4,
@@ -144,6 +155,13 @@ export default defineGkdApp({
             'RelativeLayout[childCount=2] > RelativeLayout[vid="pdd"] + @FrameLayout[childCount=1][clickable=true][visibleToUser=true][text=null][vid="pdd"] > ImageView[childCount=0][visibleToUser=true]',
           exampleUrls: 'https://e.gkd.li/0f850878-2b6a-46c7-86aa-28329df0993c',
           snapshotUrls: 'https://i.gkd.li/i/15140800',
+        },
+        {
+          key: 3,
+          name: '多多视频金币提示',
+          activityIds: '.ui.activity.HomeActivity',
+          matches: '[text^="看5分钟视频"] -2 Image',
+          snapshotUrls: 'https://i.gkd.li/i/25088623',
         },
       ],
     },
@@ -241,6 +259,7 @@ export default defineGkdApp({
             'com.xunmeng.pinduoduo.activity.NewPageMaskActivity',
             'com.xunmeng.pinduoduo.ui.activity.HomeActivity',
           ],
+          action: 'clickCenter',
           matches: 'Button[text="关闭弹窗" || desc="关闭弹窗"][clickable=true]',
           snapshotUrls: [
             'https://i.gkd.li/i/13927594',

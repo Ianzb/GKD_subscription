@@ -15,6 +15,7 @@ export default defineGkdGlobalGroups([
     matchTime: 10000,
     actionMaximum: 2,
     resetMatch: 'app',
+    forcedTime: 10000,
     actionCdKey: 0,
     actionMaximumKey: 0,
     priorityTime: 10000,
@@ -24,11 +25,11 @@ export default defineGkdGlobalGroups([
         key: 0,
         // 防止误触
         excludeMatches:
-          '([text*="搜索" || text="历史记录" || text$="在搜"][text.length>3 && text.length<7][visibleToUser=true]) || ([text="设置" || text="Submit" || text*="阅读并同意" || text$="登录" || text="选好了" || text="书签" || text="NEXT"][visibleToUser=true]) || ([text^="选择"][text*="偏好" || text*="行业"][text.length<10][visibleToUser=true])',
+          '([text*="搜索" || text="历史记录" || text$="在搜"][text.length>3 && text.length<7][visibleToUser=true]) || ([text="Submit" || text*="阅读并同意" || text="书签" || text="NEXT"][visibleToUser=true]) || ([text$="设置" || text$="选好了" || text^="下一步" || text^="完成" || text*="跳过片"][text.length<10][visibleToUser=true]) || ([text^="选择"][text*="偏好" || text*="兴趣" || text*="喜好"][text.length<10][visibleToUser=true])',
         anyMatches: [
-          '[text*="跳过"][text.length<10][width<350 && height<200][visibleToUser=true]',
-          '@[name$="View" || name$="LinearLayout"][clickable=true][childCount<2][width<300 && height<150] - [text="互动广告"][visibleToUser=true]',
-          '[childCount=0][visibleToUser=true][width<350 && height<200][(text.length<10 && (text*="跳过" || text*="跳 过" || text*="跳過" || text~="(?is).*skip.*") && text!*="视频") || (vid~="(?is).*skip.*" && vid!~="(?is).*video.*" && !(text="帮助") && !(text="取消") && !(text*="退出")) || id$="tt_splash_skip_btn" || (desc.length<10 && (desc*="跳过" || desc*="跳過" || desc~="(?is).*skip.*"))]',
+          '[text*="跳过"][text.length<10][width<500 && height<300][visibleToUser=true]',
+          '@[name$="View" || name$="LinearLayout"][clickable=true][childCount<2][width<300 && height<200] - [text="互动广告"][visibleToUser=true]',
+          '[childCount=0][visibleToUser=true][width<500 && height<300][(text.length<10 && (text*="跳过" || text*="跳 过" || text*="跳過" || text~="(?is).*skip.*") && text!*="视频" && text!*="片头" && text!*="片尾") || (vid~="(?is).*skip.*" && vid!~="(?is).*video.*" && vid!~="(?is).*head.*" && vid!~="(?is).*tail.*" && !(text="帮助") && !(text="取消") && !(text*="退出")) || id$="tt_splash_skip_btn" || (desc.length<10 && (desc*="跳过" || desc*="跳過" || desc~="(?is).*skip.*"))]',
         ],
         snapshotUrls: [
           // 互动开屏广告
@@ -37,6 +38,14 @@ export default defineGkdGlobalGroups([
 
           // text*="跳 过"
           'https://i.gkd.li/i/13421452',
+
+          'https://i.gkd.li/i/24097095', // width<500
+          'https://i.gkd.li/i/24766641', // height<300
+
+          // 避免被excludeMatches匹配
+          'https://i.gkd.li/i/24330969',
+          'https://i.gkd.li/i/24541384',
+          'https://i.gkd.li/i/24588777',
         ],
         excludeSnapshotUrls: [
           // 避免误触
@@ -44,14 +53,19 @@ export default defineGkdGlobalGroups([
           'https://i.gkd.li/i/17108010', // !(text="帮助")
           'https://i.gkd.li/i/18265000', // !(text="取消")
           'https://i.gkd.li/i/19952277', // text="Submit"
-          'https://i.gkd.li/i/20946730', // text="设置"
+          'https://i.gkd.li/i/20946730', // text$="设置"
           'https://i.gkd.li/i/20949002', // vid!~="(?is).*video.*"
           'https://i.gkd.li/i/21617520', // text!*="视频"
-          'https://i.gkd.li/i/22634992', // text$="登录"
-          'https://i.gkd.li/i/23051921', // [text^="选择"][text*="偏好"]
-          'https://i.gkd.li/i/23052289', // text="选好了"  text*="行业"
+          'https://i.gkd.li/i/22634992', // text$="登录" text*="阅读并同意"
+          'https://i.gkd.li/i/23051921', // [text^="选择"]
+          'https://i.gkd.li/i/23742770', // [text^="选择"]
+          'https://i.gkd.li/i/23743049', // [text^="选择"]
+          'https://i.gkd.li/i/23052289', // text="选好了"
           'https://i.gkd.li/i/23122415', // text="书签"
           'https://i.gkd.li/i/23225609', // text="NEXT"
+          'https://i.gkd.li/i/23741801', // text^="下一步" text$="设置"
+          'https://i.gkd.li/i/23741779', // text^="完成" text$="设置"
+          'https://i.gkd.li/i/25039297', // text*="跳过片"、text!*="片头"、text!*="片尾"、vid!~="(?is).*head.*"、vid!~="(?is).*tail.*"
         ],
       },
       {
@@ -93,9 +107,10 @@ export default defineGkdGlobalGroups([
           '([text*="全部"][text*="更新" || text*="忽略"][text.length<7][visibleToUser=true]) || ([text^="继续" || text^="仍然" || text*="权限"][text.length<6][visibleToUser=true]) || ([text*="来源"][visibleToUser=true])',
         matches: [
           '[text*="内测" || text*="测试版" || text*="新版" || text*="更新" || text*="升级" || text*="体验" || text*="內測" || text*="測試版" || text*="升級" || text*="體驗" || text*="Update" || text*="Upgrade" || text*="Experience"][text!*="自动" && text!*="自動" && text!*="成功" && text!*="失败" && text!*="失敗" && text!*="检查更新" && text!*="检测更新" && text!*="卸载"][childCount=0][visibleToUser=true]',
-          '[text*="更新" || text*="下载" || text*="安装" || text*="升级" || text*="查看" || text*="体验" || text*="确定" || text*="确认"][text.length<6][childCount=0][visibleToUser=true]',
+          '[text*="更新" || text*="下载" || text*="安装" || text*="升级" || text*="查看" || text*="体验" || text*="确定" || text*="确认" || text*="应用市场"][text.length<6][childCount=0][visibleToUser=true]',
           '([text*="不再提醒" || text$="再说" || text$="拒绝" || text$="再想想" || text*="再看看" || text^="忽略" || text^="暂不" || text^="放弃" || text^="取消" || text$="不要" || text$="再說" || text$="暫不" || text$="拒絕" || text*="稍后" || text^="关闭" || text$="Later" || text^="Ignore" || text^="Not now" || text^="Cancel"][!(text*="取消"&&text*="忽略")][text.length<6][childCount=0][visibleToUser=true]) || ([vid="closeIv" || vid="iv_close" || vid="iv_cancel" || vid="close" || vid="Close" || vid="img_close" || vid="btn_close" || vid="ivCancel" || vid="tvCancel" || vid="cancel" || vid="Cancel" || vid="ivClose" || vid="imgClose" || vid="iv_negative" || vid="update_close_icon"][childCount=0][visibleToUser=true])',
         ],
+        snapshotUrls: 'https://i.gkd.li/i/24158267', // text*="应用市场"
         excludeSnapshotUrls: [
           // 避免误触
           'https://i.gkd.li/i/17710149', // text!*="卸载"

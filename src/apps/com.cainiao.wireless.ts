@@ -74,6 +74,15 @@ export default defineGkdApp({
             'https://i.gkd.li/i/22570632',
           ],
         },
+        {
+          key: 7,
+          fastQuery: true,
+          activityIds:
+            'com.taobao.cainiao.logistic.ui.view.LogisticDetailActivity',
+          matches:
+            'Image[childCount=0][width<100 && height<100] < @View[clickable=true][childCount=1] - Image[childCount=0][text="超时享"] <<n [vid="browser_fragment_layout"]',
+          snapshotUrls: 'https://i.gkd.li/i/24099845',
+        },
       ],
     },
     {
@@ -183,6 +192,19 @@ export default defineGkdApp({
           matches:
             '@[clickable=true] > View[desc="展开"] <<n LinearLayout[vid="layout_root"]',
           snapshotUrls: 'https://i.gkd.li/i/15879126',
+        },
+      ],
+    },
+    {
+      key: 11,
+      name: '其他-好友代取功能提示',
+      rules: [
+        {
+          fastQuery: true,
+          activityIds:
+            'com.cainiao.wireless.homepage.view.activity.HomePageActivity',
+          matches: ['[text^="好友代取"]', '[text="下次再说"][clickable=true]'],
+          snapshotUrls: 'https://i.gkd.li/i/23787455',
         },
       ],
     },

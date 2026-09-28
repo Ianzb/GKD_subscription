@@ -15,7 +15,7 @@ export default defineGkdApp({
       rules: [
         {
           matches:
-            '@[vid*="close"] > [text*="跳过"][text.length<10][visibleToUser=true]',
+            '@[vid*="close"] > [text*="跳过"][text.length<10][width<500 && height<300][visibleToUser=true]',
           snapshotUrls: [
             'https://i.gkd.li/i/17576743',
             'https://i.gkd.li/i/17578451',
@@ -82,18 +82,19 @@ export default defineGkdApp({
         {
           key: 4,
           fastQuery: true,
-          activityIds: 'com.taobao.search.uniform.SearchActivity',
+          activityIds: [
+            'com.taobao.search.uniform.SearchActivity',
+            'com.taobao.android.detail.alittdetail.TTDetailActivity',
+            'com.taobao.tao.TBMainActivity',
+          ],
           matches:
-            '@TextView[clickable=true][width<160 && height<160] - [childCount=0][text="开心收下"] <<n [vid="poplayer_inner_view"]',
-          snapshotUrls: 'https://i.gkd.li/i/22949963',
-        },
-        {
-          key: 5,
-          fastQuery: true,
-          activityIds: 'com.taobao.android.detail.alittdetail.TTDetailActivity',
-          matches:
-            '@Image[width<140 && height<140][clickable=true][text!=null][childCount=0] - TextView[text.length>0] <n [childCount<6] <<n WebView[vid="poplayer_inner_view"]',
-          snapshotUrls: 'https://i.gkd.li/i/23289412',
+            '@[clickable=true][childCount=0][width<150 && height<150][index=parent.childCount.minus(1)] -n TextView[text.length>0] <n View <<n WebView[vid="poplayer_inner_view"]',
+          snapshotUrls: [
+            'https://i.gkd.li/i/22949963',
+            'https://i.gkd.li/i/23289412',
+            'https://i.gkd.li/i/23567053',
+            'https://i.gkd.li/i/24982514',
+          ],
         },
       ],
     },
@@ -203,12 +204,16 @@ export default defineGkdApp({
           activityIds: [
             'com.taobao.android.detail.wrapper.activity.DetailActivity',
             'com.taobao.android.order.bundle.TBOrderListActivity',
+            'com.taobao.browser.BrowserActivity',
+            'com.taobao.themis.container.app.TMSActivity',
           ],
           matches: '[vid="update_imageview_cancel_v2"]',
           snapshotUrls: [
             'https://i.gkd.li/i/13336760',
             'https://i.gkd.li/i/13695520',
             'https://i.gkd.li/i/14899863',
+            'https://i.gkd.li/i/24861114', //芭芭农场
+            'https://i.gkd.li/i/24999523', //淘金币
           ],
         },
       ],
@@ -332,6 +337,7 @@ export default defineGkdApp({
       desc: '点击关闭',
       rules: [
         {
+          key: 0,
           fastQuery: true,
           activityIds: 'com.alipay.android.msp.ui.views.MspContainerActivity',
           matches: [
@@ -344,6 +350,15 @@ export default defineGkdApp({
             'https://i.gkd.li/i/18296345',
             'https://i.gkd.li/i/22113615',
           ],
+        },
+        {
+          key: 1,
+          name: '充值类商品界面广告',
+          fastQuery: true,
+          activityIds: 'com.taobao.weex.WXActivity',
+          matches:
+            '@ImageView[clickable=true][width<150 && height<155] < FrameLayout <2 FrameLayout < FrameLayout < FrameLayout < FrameLayout <2 [vid="weex_render_view"]',
+          snapshotUrls: 'https://i.gkd.li/i/23923991',
         },
       ],
     },

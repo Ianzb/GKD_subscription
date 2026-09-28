@@ -18,8 +18,9 @@ export default defineGkdApp({
           fastQuery: true,
           excludeActivityIds:
             'com.bytedance.sdk.openadsdk.core.component.reward.activity.TTRewardVideoActivity',
+          excludeMatches: '[text="开启安全备份"][visibleToUser=true]',
           anyMatches: [
-            '[text*="跳过"][text.length<10][visibleToUser=true]',
+            '[text*="跳过"][text.length<10][width<500 && height<300][visibleToUser=true]',
             '[text.length<10][text*="跳过"][visibleToUser=true]',
           ],
           exampleUrls: 'https://e.gkd.li/5185bf9d-70f7-4841-991e-55b1b6768e97',
@@ -27,7 +28,10 @@ export default defineGkdApp({
             'https://i.gkd.li/i/23549481',
             'https://i.gkd.li/i/23549490', // 无法快速查询
           ],
-          excludeSnapshotUrls: 'https://i.gkd.li/i/23549097',
+          excludeSnapshotUrls: [
+            'https://i.gkd.li/i/23549097',
+            'https://i.gkd.li/i/23567868',
+          ],
         },
         {
           key: 1,

@@ -94,7 +94,7 @@ export default defineGkdApp({
             '.mvi.notice.NoticeListActivity',
           ],
           matches:
-            '@ImageView[childCount=0][text=null][desc=null][id=null][visibleToUser=true][width<90 && height<90] < FrameLayout[childCount=1][text=null][desc=null][id=null][parent.childCount>3] +n FrameLayout >(1,2) [text^="立即" || text$="详情" || text^="了解" || text="去微信看看" || text$="应用" || text="进入小程序" || text="领取优惠" || text="跳转微信"]',
+            '@ImageView[childCount=0][text=null][desc=null][id=null][visibleToUser=true][width<90 && height<90] < FrameLayout[childCount=1][text=null][desc=null][id=null][parent.childCount>3] <n FrameLayout >(2,3) [text^="立即" || text$="详情" || text^="了解" || text="去微信看看" || text$="应用" || text="进入小程序" || text="领取优惠" || text="跳转微信"]',
           exampleUrls: 'https://e.gkd.li/f640d0c2-197d-45ef-98ff-58a04920bd2d',
           snapshotUrls: [
             'https://i.gkd.li/i/17358027',
@@ -180,6 +180,15 @@ export default defineGkdApp({
             'https://i.gkd.li/i/23289402',
           ],
         },
+        {
+          key: 4,
+          fastQuery: true,
+          activityIds:
+            'com.zjwh.android_wh_physicalfitness.mvi.home.HomeActivity',
+          matches:
+            '@[id="com.kwad.dy.sdk:id/ksad_ad_dislike"][clickable=true] - * >2 [text="广告"]',
+          snapshotUrls: 'https://i.gkd.li/i/23773011',
+        },
       ],
     },
     {
@@ -230,9 +239,12 @@ export default defineGkdApp({
       rules: [
         {
           key: 0,
-          activityIds: '.mvi.home.HomeActivity',
+          activityIds: ['.mvi.home.HomeActivity', '.mvi.splash.AdActivity'],
           matches: '@ImageView[vid="dialog_close"] +n [text*="公告"]',
-          snapshotUrls: 'https://i.gkd.li/i/22526467',
+          snapshotUrls: [
+            'https://i.gkd.li/i/22526467',
+            'https://i.gkd.li/i/23883452',
+          ],
         },
         {
           key: 1,
